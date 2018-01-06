@@ -1,0 +1,43 @@
+/* PAT Basic 1002 */
+
+#include <stdio.h>
+
+int main(void)
+{
+    int n,sum=0,i=0;
+    int array[3];
+    
+    n = getchar();
+     while(n!=10)
+     {
+         sum=sum+(n-48);            /* num-48 是为从字符转换为整数 */
+         n=getchar();
+     }
+    
+    for(;sum>0;i++)      /* 将和数单个存入数组 */
+    {
+        array[i]=sum%10;
+        sum=sum/10;
+    }
+    
+    for(;i>0;i--)       /* 反向输出数组 */
+    {
+        switch (array[i-1]) {
+            case 0: printf("ling");break;
+            case 1: printf("yi");break;
+            case 2: printf("er");break;
+            case 3: printf("san");break;
+            case 4: printf("si");break;
+            case 5: printf("wu");break;
+            case 6: printf("liu");break;
+            case 7: printf("qi");break;
+            case 8: printf("ba");break;
+            case 9: printf("jiu");break;
+            default: printf("Wrong!");
+                break;
+        };
+        if(i-1)
+            printf(" ");
+    }
+    return 0;
+}
