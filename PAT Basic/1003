@@ -1,0 +1,69 @@
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
+
+int check_string(char *arr[], int n);
+
+int main(void){
+    int n;
+    scanf("%d",&n);
+    if (n>0) {
+        char *arr[n];
+        for (int i=0; i<n; i++) {
+            arr[i]=(char *) malloc(100*sizeof(char));
+            scanf("%s",arr[i]);
+        }
+        
+        for (int state,i=0; i<n; ) {
+            state=check_string(arr, i);
+            if (state){
+                printf("YES");
+                free(arr[i]);
+            }
+            else{
+                printf("NO");
+                free(arr[i]);
+    
+            }
+            if (++i<n) {
+                printf("\n");
+            }
+        }
+    }
+   
+    return 0;
+}
+
+int check_string(char *arr[], int n){
+    int countP=0,countT=0,tail=0;
+    int positionP=-1,positionT=-1;
+    for(int i=0;arr[n][i]!='\0';i++){
+        if (arr[n][i]!='P'&&arr[n][i]!='A'&&arr[n][i]!='T')
+            return false;
+    }
+    for (int i=0; arr[n][i]!='\0'; i++) {
+        
+        if (arr[n][i]=='P') {
+            countP++;
+            positionP=i;
+        }
+        if (arr[n][i]=='T') {
+            countT++;
+            positionT=i;
+        }
+        tail=i;
+    }
+    if (countT==1&&countP==1) {
+        if (positionP==(positionT-2))
+            return true;
+        else  if (positionP==(positionT-3))
+            return true;
+        else if ((positionT-positionP!=1)&&((positionP)*(positionT-positionP-1)==(tail-positionT)))
+            return true;
+        else
+            return false;
+    }
+    else
+    return false;
+}
+
